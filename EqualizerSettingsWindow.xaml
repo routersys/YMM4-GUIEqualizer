@@ -1,0 +1,12 @@
+﻿<Window x:Class="ymm4_guiequalizer.EqualizerSettingsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="GUIイコライザー設定" Height="450" Width="800"
+        WindowStartupLocation="CenterOwner">
+    <Grid Margin="10">
+        <StackPanel>
+            <CheckBox IsChecked="{Binding HighQualityMode}" Content="高音質モードを有効にする"/>
+            <TextBlock Text="（CPU負荷が増加します。）" FontSize="10" Margin="20,0,0,0"/>
+        </StackPanel>
+    </Grid>
+</Window>

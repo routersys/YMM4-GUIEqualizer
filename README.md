@@ -3,6 +3,8 @@
 ゆっくりMovieMaker4（YMM4）用のGUI音声イコライザープラグインです。
 音声エフェクトとして追加され、グラフを直接操作することで直感的な音質調整を可能にします。
 
+![image](https://github.com/routersys/YMM4-GUIEqualizer/blob/main/equalizer.image.png)
+
 ## 主な機能
 
 - グラフの直接操作による直感的な音質調整

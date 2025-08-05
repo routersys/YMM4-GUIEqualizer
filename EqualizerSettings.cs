@@ -24,6 +24,9 @@ namespace ymm4_guiequalizer
         public double EditorHeight { get => editorHeight; set => Set(ref editorHeight, value); }
         private double editorHeight = 200;
 
+        public string DefaultPreset { get => defaultPreset; set => Set(ref defaultPreset, value); }
+        private string defaultPreset = "";
+
         public override void Initialize()
         {
             Load();
@@ -39,17 +42,22 @@ namespace ymm4_guiequalizer
                 if (settings != null)
                 {
                     this.EditorHeight = settings.EditorHeight;
+                    this.DefaultPreset = settings.DefaultPreset ?? "";
                 }
             }
             catch { }
         }
 
-        public void Save()
+        public override void Save()
         {
             try
             {
                 Directory.CreateDirectory(settingsDir);
-                var settings = new JsonSettings { EditorHeight = this.EditorHeight };
+                var settings = new JsonSettings
+                {
+                    EditorHeight = this.EditorHeight,
+                    DefaultPreset = this.DefaultPreset
+                };
                 var json = JsonSerializer.Serialize(settings);
                 File.WriteAllText(sizeSettingsPath, json);
             }
@@ -60,5 +68,6 @@ namespace ymm4_guiequalizer
     internal class JsonSettings
     {
         public double EditorHeight { get; set; }
+        public string? DefaultPreset { get; set; }
     }
 }

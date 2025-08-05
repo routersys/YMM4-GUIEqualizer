@@ -194,13 +194,13 @@ namespace ymm4_guiequalizer
 
         public float Process(float input, int channel)
         {
-            if (channel == 0) // Left
+            if (channel == 0)
             {
                 float output = b0 * input + b1 * x1L + b2 * x2L - a1 * y1L - a2 * y2L;
                 x2L = x1L; x1L = input; y2L = y1L; y1L = output;
                 return output;
             }
-            else // Right
+            else
             {
                 float output = b0 * input + b1 * x1R + b2 * x2R - a1 * y1R - a2 * y2R;
                 x2R = x1R; x1R = input; y2R = y1R; y1R = output;

@@ -1,12 +1,155 @@
 ﻿<Window x:Class="ymm4_guiequalizer.EqualizerSettingsWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="GUIイコライザー設定" Height="450" Width="800"
-        WindowStartupLocation="CenterOwner">
+        xmlns:local="clr-namespace:ymm4_guiequalizer"
+        xmlns:theme="clr-namespace:YukkuriMovieMaker.Theme;assembly=YukkuriMovieMaker.Plugin"
+        Title="GUIイコライザー設定" Height="600" Width="900"
+        WindowStartupLocation="CenterOwner"
+        Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}"
+        Foreground="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}">
+    <Window.Resources>
+        <local:BooleanConverter x:Key="NotNullConverter" />
+    </Window.Resources>
+
     <Grid Margin="10">
-        <StackPanel>
-            <CheckBox IsChecked="{Binding HighQualityMode}" Content="高音質モードを有効にする"/>
-            <TextBlock Text="（CPU負荷が増加します。）" FontSize="10" Margin="20,0,0,0"/>
-        </StackPanel>
+        <TabControl>
+            <TabItem Header="基本設定">
+                <StackPanel Margin="10">
+                    <CheckBox IsChecked="{Binding HighQualityMode}" Content="高音質モードを有効にする" Margin="0,0,0,10">
+                        <CheckBox.ToolTip>
+                            <ToolTip>
+                                <TextBlock>
+                                    オーバーサンプリングを使用して、音声の品質を向上させます。<LineBreak/>
+                                    特に高周波数のフィルタリング精度が向上しますが、CPU負荷が増加します。
+                                </TextBlock>
+                            </ToolTip>
+                        </CheckBox.ToolTip>
+                    </CheckBox>
+                    <TextBlock Text="（CPU負荷が増加します。）" FontSize="10" Margin="20,0,0,20" Opacity="0.7"/>
+
+                    <TextBlock Text="デフォルトプリセット" FontWeight="Bold" Margin="0,0,0,5"/>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <ComboBox Name="DefaultPresetComboBox"
+                                  SelectedItem="{Binding DefaultPreset, Mode=TwoWay}"
+                                  SelectionChanged="DefaultPresetComboBox_SelectionChanged"
+                                  Margin="0,0,10,0"/>
+                        <Button Grid.Column="1" Content="クリア" Width="60"
+                                Click="ClearDefaultPreset_Click"
+                                ToolTip="デフォルトプリセットの設定をクリアします"/>
+                    </Grid>
+                    <TextBlock Text="新しいイコライザーを追加した際に自動適用されるプリセットです。"
+                               FontSize="10" Opacity="0.7" Margin="0,5,0,0"/>
+                </StackPanel>
+            </TabItem>
+
+            <TabItem Header="プリセット管理">
+                <Grid Margin="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="200"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid Grid.Column="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Grid.Row="0" Text="プリセットグループ" FontWeight="Bold" Margin="0,0,0,5"/>
+                        <ListBox Grid.Row="1" Name="GroupListBox"
+                                 SelectionChanged="GroupListBox_SelectionChanged">
+                            <ListBox.Items>
+                                <ListBoxItem Content="すべて" IsSelected="True" Tag=""/>
+                                <ListBoxItem Content="お気に入り" Tag="favorites"/>
+                                <ListBoxItem Content="ボーカル" Tag="vocal"/>
+                                <ListBoxItem Content="BGM" Tag="bgm"/>
+                                <ListBoxItem Content="効果音" Tag="sfx"/>
+                                <ListBoxItem Content="その他" Tag="other"/>
+                            </ListBox.Items>
+                        </ListBox>
+
+                        <StackPanel Grid.Row="2" Margin="0,10,0,0">
+                            <Button Content="新規グループ"
+                                    Click="NewGroup_Click" Margin="0,0,0,5"/>
+                            <Button Content="グループ削除"
+                                    Click="DeleteGroup_Click"/>
+                        </StackPanel>
+                    </Grid>
+
+                    <Grid Grid.Column="1" Margin="10,0,0,0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <Grid Grid.Row="0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="0" Text="プリセット一覧" FontWeight="Bold" VerticalAlignment="Center"/>
+                            <Button Grid.Column="1" Content="インポート"
+                                    Click="ImportPreset_Click" Margin="0,0,10,0"
+                                    ToolTip="プリセットファイルをインポートします"/>
+                            <Button Grid.Column="2" Content="エクスポート"
+                                    Click="ExportPreset_Click"
+                                    ToolTip="選択したプリセットをエクスポートします"/>
+                        </Grid>
+
+                        <Grid Grid.Row="1" Margin="0,10,0,0" AllowDrop="True"
+                              Drop="PresetList_Drop" DragOver="PresetList_DragOver">
+                            <ListBox Name="PresetListBox"
+                                     SelectionChanged="PresetListBox_SelectionChanged"
+                                     MouseDoubleClick="PresetListBox_MouseDoubleClick">
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="Auto"/>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="Auto"/>
+                                            </Grid.ColumnDefinitions>
+                                            <CheckBox Grid.Column="0" IsChecked="{Binding IsFavorite}"
+                                                      Checked="FavoriteCheckBox_Changed"
+                                                      Unchecked="FavoriteCheckBox_Changed"
+                                                      ToolTip="お気に入りに追加/削除"/>
+                                            <TextBlock Grid.Column="1" Text="{Binding Name}"
+                                                       VerticalAlignment="Center" Margin="5,0"/>
+                                            <TextBlock Grid.Column="2" Text="{Binding Group}"
+                                                       FontSize="10" Foreground="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"
+                                                       VerticalAlignment="Center"/>
+                                        </Grid>
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
+                            </ListBox>
+                            <Border Background="#80000000" Name="DropOverlay" Visibility="Collapsed">
+                                <TextBlock Text="プリセットファイルをドロップしてインポート"
+                                           HorizontalAlignment="Center" VerticalAlignment="Center"
+                                           Foreground="White" FontSize="16"/>
+                            </Border>
+                        </Grid>
+
+                        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,10,0,0">
+                            <Button Content="名前変更"
+                                    Click="RenamePreset_Click" Margin="0,0,10,0"
+                                    IsEnabled="{Binding ElementName=PresetListBox, Path=SelectedItem, Converter={StaticResource NotNullConverter}}"/>
+                            <Button Content="グループ変更"
+                                    Click="ChangeGroup_Click" Margin="0,0,10,0"
+                                    IsEnabled="{Binding ElementName=PresetListBox, Path=SelectedItem, Converter={StaticResource NotNullConverter}}"/>
+                            <Button Content="削除"
+                                    Click="DeletePreset_Click"
+                                    IsEnabled="{Binding ElementName=PresetListBox, Path=SelectedItem, Converter={StaticResource NotNullConverter}}"/>
+                        </StackPanel>
+                    </Grid>
+                </Grid>
+            </TabItem>
+        </TabControl>
     </Grid>
 </Window>

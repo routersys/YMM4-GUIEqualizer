@@ -19,10 +19,35 @@ namespace ymm4_guiequalizer
 
         [Display(Name = "バンド設定")]
         [GuiEqualizerEditor(PropertyEditorSize = PropertyEditorSize.FullWidth)]
-        public ObservableCollection<EQBand> Bands { get; } = new()
+        public ObservableCollection<EQBand> Bands { get; } = new();
+
+        public GuiEqualizerEffect()
         {
-            new(true, FilterType.Peak, 500, 0, 1.0, StereoMode.Stereo, "バンド 1"),
-        };
+            LoadDefaultPreset();
+        }
+
+        private void LoadDefaultPreset()
+        {
+            var defaultPreset = EqualizerSettings.Default.DefaultPreset;
+            if (!string.IsNullOrEmpty(defaultPreset))
+            {
+                var loadedBands = PresetManager.LoadPreset(defaultPreset);
+                if (loadedBands != null)
+                {
+                    Bands.Clear();
+                    foreach (var band in loadedBands)
+                    {
+                        Bands.Add(band);
+                    }
+                    return;
+                }
+            }
+
+            if (Bands.Count == 0)
+            {
+                Bands.Add(new EQBand(true, FilterType.Peak, 500, 0, 1.0, StereoMode.Stereo, "バンド 1"));
+            }
+        }
 
         public override IAudioEffectProcessor CreateAudioEffect(TimeSpan duration)
         {

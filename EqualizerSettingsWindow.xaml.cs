@@ -133,11 +133,15 @@ namespace ymm4_guiequalizer
             }
         }
 
-        private void FavoriteCheckBox_Changed(object sender, RoutedEventArgs e)
+        private void FavoriteButton_Click(object sender, RoutedEventArgs e)
         {
-            if (sender is CheckBox checkBox && checkBox.DataContext is PresetInfo preset)
+            if (sender is Button button && button.DataContext is PresetInfo preset)
             {
+                preset.IsFavorite = !preset.IsFavorite;
                 PresetManager.SetPresetFavorite(preset.Name, preset.IsFavorite);
+
+                // UI更新のため再読み込み
+                LoadPresetList();
             }
         }
 

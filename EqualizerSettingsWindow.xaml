@@ -9,6 +9,7 @@
         Foreground="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}">
     <Window.Resources>
         <local:BooleanConverter x:Key="NotNullConverter" />
+        <local:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
     </Window.Resources>
 
     <Grid Margin="10">
@@ -116,10 +117,19 @@
                                                 <ColumnDefinition Width="*"/>
                                                 <ColumnDefinition Width="Auto"/>
                                             </Grid.ColumnDefinitions>
-                                            <CheckBox Grid.Column="0" IsChecked="{Binding IsFavorite}"
-                                                      Checked="FavoriteCheckBox_Changed"
-                                                      Unchecked="FavoriteCheckBox_Changed"
-                                                      ToolTip="お気に入りに追加/削除"/>
+                                            <Button Grid.Column="0" 
+                                                    Background="Transparent" 
+                                                    BorderThickness="0"
+                                                    Width="20" Height="20"
+                                                    Click="FavoriteButton_Click"
+                                                    DataContext="{Binding}"
+                                                    ToolTip="お気に入りに追加/削除"
+                                                    Margin="0,0,5,0">
+                                                <Path Data="M12,17.27L18.18,21L17.27,14.41L22,9.82L15.77,8.89L12,3L8.23,8.89L2,9.82L6.73,14.41L5.82,21L12,17.27Z"
+                                                      Fill="{Binding IsFavorite, Converter={x:Static local:FavoriteToColorConverter.Instance}}"
+                                                      Stretch="Uniform" 
+                                                      Width="12" Height="12"/>
+                                            </Button>
                                             <TextBlock Grid.Column="1" Text="{Binding Name}"
                                                        VerticalAlignment="Center" Margin="5,0"/>
                                             <TextBlock Grid.Column="2" Text="{Binding Group}"

@@ -57,12 +57,18 @@
                    StaysOpen="False"
                    Placement="Bottom"
                    PlacementTarget="{Binding ElementName=PresetToggleButton}"
-                   MinWidth="450"
-                   MaxHeight="400"
-                   AllowsTransparency="True" PopupAnimation="Fade">
+                   Width="450"
+                   Height="400"
+                   AllowsTransparency="True" 
+                   PopupAnimation="Fade"
+                   HorizontalOffset="0"
+                   VerticalOffset="0">
                 <Border Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}"
                         BorderBrush="{DynamicResource {x:Static theme:YMM4Colors.IconBorderBrushKey}}"
-                        BorderThickness="1" CornerRadius="3">
+                        BorderThickness="1" 
+                        CornerRadius="3"
+                        Width="450"
+                        Height="400">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="150"/>

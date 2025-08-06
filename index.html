@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GUIイコライザー for YMM4</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+            line-height: 1.6;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+        header {
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+        h1 {
+            color: #111;
+            font-size: 2.5em;
+        }
+        h2 {
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 10px;
+            margin-top: 40px;
+            font-size: 1.8em;
+        }
+        .container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.05);
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        ul, ol {
+            padding-left: 20px;
+        }
+        li {
+            margin-bottom: 10px;
+        }
+        code {
+            background-color: #eee;
+            padding: 2px 4px;
+            border-radius: 4px;
+            font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;
+        }
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+            color: #777;
+        }
+        pre {
+            background-color: #f4f4f4;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>GUIイコライザー for YMM4</h1>
+        <p>直感的な操作で音質を調整できる、ゆっくりMovieMaker4用プラグイン</p>
+    </header>
+
+    <div class="container">
+        <section id="introduction">
+            <p>
+                ゆっくりMovieMaker4（YMM4）用のGUI音声イコライザープラグインです。
+                音声エフェクトとして追加され、グラフを直接操作することで直感的な音質調整を可能にします。
+            </p>
+            <img src="https://github.com/routersys/YMM4-GUIEqualizer/blob/main/equalizer.image.png?raw=true" alt="GUIイコライザーのイメージ画像">
+        </section>
+
+        <section id="features">
+            <h2>主な機能</h2>
+            <ul>
+                <li>グラフの直接操作による直感的な音質調整</li>
+                <li>アニメーション（キーフレーム）対応</li>
+                <li>ドラッグによる複数キーフレームの一括移動</li>
+                <li>右クリックによるバンドの追加・削除</li>
+                <li>縦軸（ゲイン）のズーム機能</li>
+                <li>高音質モード（設定から有効化）</li>
+                <li>プリセット管理</li>
+            </ul>
+        </section>
+
+        <section id="installation">
+            <h2>インストール</h2>
+            <ol>
+                <li>GitHubの<a href="https://github.com/routersys/YMM4-GUIEqualizer/releases/latest" class="button" target="_blank">リリースページ</a>から、最新版の <code>.ymme</code> ファイルをダウンロードします。</li>
+                <li>ダウンロードした <code>.ymme</code> ファイルをクリックします。</li>
+                <li>チェックボックスをクリックして、インストールします。</li>
+                <li>ポップアップが表示されたら、インストール完了です。</li>
+            </ol>
+        </section>
+
+        <section id="usage">
+            <h2>使用方法</h2>
+            <ol>
+                <li>タイムラインでアイテムを選択します。</li>
+                <li>「エフェクトの追加」 → 「音声エフェクト」から「GUIイコライザー」を選択します。</li>
+                <li>エフェクト欄に表示されたグラフを操作して音質を調整します。</li>
+            </ol>
+        </section>
+    </div>
+
+    <footer>
+        <section id="license">
+            <h2>ライセンス</h2>
+            <pre>
+MIT License
+
+Copyright (c) 2025 Routersys
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+            </pre>
+        </section>
+    </footer>
+
+</body>
+</html>

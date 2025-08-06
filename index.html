@@ -6,87 +6,58 @@
     <title>GUIイコライザー for YMM4</title>
     <style>
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+            font-family: sans-serif;
             line-height: 1.6;
-            color: #333;
+            margin: 40px auto;
             max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-            background-color: #f9f9f9;
+            padding: 0 10px;
         }
-        header {
-            text-align: center;
-            border-bottom: 1px solid #ddd;
-            padding-bottom: 20px;
-            margin-bottom: 30px;
-        }
-        h1 {
-            color: #111;
-            font-size: 2.5em;
-        }
-        h2 {
-            border-bottom: 1px solid #ddd;
-            padding-bottom: 10px;
-            margin-top: 40px;
-            font-size: 1.8em;
-        }
-        .container {
-            background-color: #fff;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 0 15px rgba(0,0,0,0.05);
+        h1, h2 {
+            border-bottom: 1px solid #eaecef;
+            padding-bottom: 0.3em;
         }
         img {
             max-width: 100%;
             height: auto;
-            border-radius: 8px;
-            margin: 20px 0;
         }
-        ul, ol {
-            padding-left: 20px;
+        a {
+            color: #0366d6;
+            text-decoration: none;
         }
-        li {
-            margin-bottom: 10px;
-        }
-        code {
-            background-color: #eee;
-            padding: 2px 4px;
-            border-radius: 4px;
-            font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;
-        }
-        footer {
-            text-align: center;
-            margin-top: 40px;
-            padding-top: 20px;
-            border-top: 1px solid #ddd;
-            color: #777;
+        a:hover {
+            text-decoration: underline;
         }
         pre {
-            background-color: #f4f4f4;
-            padding: 15px;
-            border-radius: 5px;
-            overflow-x: auto;
-            white-space: pre-wrap;
-            word-wrap: break-word;
+            background-color: #f6f8fa;
+            padding: 16px;
+            border-radius: 3px;
+            overflow: auto;
+        }
+        code {
+            font-family: monospace, monospace;
+        }
+        li {
+            margin-bottom: 8px;
         }
     </style>
 </head>
 <body>
     <header>
         <h1>GUIイコライザー for YMM4</h1>
-        <p>直感的な操作で音質を調整できる、ゆっくりMovieMaker4用プラグイン</p>
     </header>
 
-    <div class="container">
-        <section id="introduction">
+    <main>
+        <section>
             <p>
                 ゆっくりMovieMaker4（YMM4）用のGUI音声イコライザープラグインです。
                 音声エフェクトとして追加され、グラフを直接操作することで直感的な音質調整を可能にします。
             </p>
-            <img src="https://github.com/routersys/YMM4-GUIEqualizer/blob/main/equalizer.image.png?raw=true" alt="GUIイコライザーのイメージ画像">
+            <p>
+                <img src="https://github.com/routersys/YMM4-GUIEqualizer/blob/main/equalizer.image.png?raw=true" alt="GUIイコライザーのスクリーンショット">
+            </p>
         </section>
 
-        <section id="features">
+        <section>
             <h2>主な機能</h2>
             <ul>
                 <li>グラフの直接操作による直感的な音質調整</li>
@@ -99,17 +70,17 @@
             </ul>
         </section>
 
-        <section id="installation">
+        <section>
             <h2>インストール</h2>
             <ol>
-                <li>GitHubの<a href="https://github.com/routersys/YMM4-GUIEqualizer/releases/latest" class="button" target="_blank">リリースページ</a>から、最新版の <code>.ymme</code> ファイルをダウンロードします。</li>
+                <li>GitHubの<a href="https://github.com/routersys/YMM4-GUIEqualizer/releases/latest">リリースページ</a>から、最新版の <code>.ymme</code> ファイルをダウンロードします。</li>
                 <li>ダウンロードした <code>.ymme</code> ファイルをクリックします。</li>
                 <li>チェックボックスをクリックして、インストールします。</li>
                 <li>ポップアップが表示されたら、インストール完了です。</li>
             </ol>
         </section>
 
-        <section id="usage">
+        <section>
             <h2>使用方法</h2>
             <ol>
                 <li>タイムラインでアイテムを選択します。</li>
@@ -117,13 +88,10 @@
                 <li>エフェクト欄に表示されたグラフを操作して音質を調整します。</li>
             </ol>
         </section>
-    </div>
 
-    <footer>
-        <section id="license">
+        <section>
             <h2>ライセンス</h2>
-            <pre>
-MIT License
+            <pre><code>MIT License
 
 Copyright (c) 2025 Routersys
 
@@ -143,10 +111,9 @@ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-            </pre>
+SOFTWARE.</code></pre>
         </section>
-    </footer>
+    </main>
 
 </body>
 </html>
